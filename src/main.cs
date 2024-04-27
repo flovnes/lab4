@@ -5,7 +5,7 @@ namespace struct_lab_student {
 			List<Student> students = [];
 			try {
 				StreamReader reader = new(fileName);
-				string line;
+				string? line;
 				while ((line = reader.ReadLine()) != null) {
 					Student student = new(line);
 					students.Add(student);
@@ -17,26 +17,31 @@ namespace struct_lab_student {
 		}
 
 		static void RunMenu(List<Student> students) {
-			int match;			
+			int match;
 			do {
- 				Console.WriteLine("Виберіть варіант форматування\nПопов Антон [1]\nВолощук Влад [2]\nДмитро Киба [3]\nНомер > ");
-				match = int.Parse(Console.ReadLine());
+				Console.Write("\n<- Вихід [0]\nВиконати варіант 9 студента Попов Антон [1]\nВиконати варіант 10 студента Дмитро Киба [2]\nВиконати варіант 24 студента Волощук Влад [3]\nНомер > ");
+				string? s = Console.ReadLine();
+				if (int.TryParse(s, out match)) {
 					switch (match) {
-					case 1:
-						Var9(students);
-						break;
-					case 2:
-						Var10(students);
-						break;
-					case 3:
-						Var24(students);
-						break;
-					default:
-						Console.WriteLine("Немає такого варіанту.");
-						break;
+						case 1:
+							Var9(students);
+							break;
+						case 2:
+							Var10(students);
+							break;
+						case 3:
+							Var24(students);
+							break;
+						case 0:
+							break;
+						default:
+							Console.WriteLine("Немає такого варіанту.");
+							break;
 					}
+				}
 			} while (match != 0);
 		}
+
 
 		static void Main() {
 	  		Console.OutputEncoding = UTF8Encoding.UTF8;
