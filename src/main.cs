@@ -1,6 +1,6 @@
 ﻿using System.Text;
 namespace struct_lab_student {
-	partial class Program {
+	public partial class Program {
 		static List<Student> ReadData(string fileName) {
 			List<Student> students = [];
 			try {
@@ -23,13 +23,13 @@ namespace struct_lab_student {
 				match = int.Parse(Console.ReadLine());
 					switch (match) {
 					case 1:
-						var9(students);
+						Var9(students);
 						break;
 					case 2:
-						var10(students);
+						Var10(students);
 						break;
 					case 3:
-						var24(students);
+						Var24(students);
 						break;
 					default:
 						Console.WriteLine("Немає такого варіанту.");
@@ -40,7 +40,7 @@ namespace struct_lab_student {
 
 		static void Main() {
 	  		Console.OutputEncoding = UTF8Encoding.UTF8;
-			List<Student> students = ReadData("input.txt");
+			List<Student> students = ReadData("../input.txt");
 			RunMenu(students);
 		}
 	}

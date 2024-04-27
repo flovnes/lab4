@@ -1,5 +1,5 @@
 namespace struct_lab_student {
-	struct Student {
+	public struct Student {
 		public string surName;
 		public string firstName;
 		public string patronymic;
