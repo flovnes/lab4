@@ -6,12 +6,9 @@ namespace struct_lab_student {
 			try {
 				StreamReader reader = new(fileName);
 				string? line;
-				while ((line = reader.ReadLine()) != null) {
-					Student student = new(line);
-					students.Add(student);
-				}
+				while ((line = reader.ReadLine()) != null)
+					students.Add(new(line));
 			}
-			catch (DirectoryNotFoundException) { Console.WriteLine($"\n\nno input\n\n"); }
 			catch (IOException e) { Console.WriteLine($"idk -> {e.Message}"); }
 			return students;
 		}
