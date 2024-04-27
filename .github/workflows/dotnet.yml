@@ -23,6 +23,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore ./tests/
     - name: Build
-      run: dotnet build ./src/ --no-restore && dotnet build ./tests/ --no-restore 
+      run: dotnet build ./src/  && dotnet build ./tests/  
     - name: Test
       run: dotnet test --no-build --verbosity normal ./tests
