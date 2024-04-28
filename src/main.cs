@@ -1,9 +1,13 @@
 ﻿using System.Text;
-namespace struct_lab_student {
-	public partial class Program {
-		static List<Student> ReadData(string fileName) {
+namespace struct_lab_student
+{
+	public partial class Program
+	{
+		static List<Student> ReadData(string fileName)
+		{
 			List<Student> students = [];
-			try {
+			try
+			{
 				StreamReader reader = new(fileName);
 				string? line;
 				while ((line = reader.ReadLine()) != null)
@@ -13,13 +17,17 @@ namespace struct_lab_student {
 			return students;
 		}
 
-		static void RunMenu(List<Student> students) {
+		static void RunMenu(List<Student> students)
+		{
 			int match;
-			do {
+			do
+			{
 				Console.Write("\n<- Вихід [0]\nВиконати варіант 9 студента Попов Антон [1]\nВиконати варіант 10 студента Дмитро Киба [2]\nВиконати варіант 24 студента Волощук Влад [3]\nНомер > ");
 				string? s = Console.ReadLine();
-				if (int.TryParse(s, out match)) {
-					switch (match) {
+				if (int.TryParse(s, out match))
+				{
+					switch (match)
+					{
 						case 1:
 							Var9(students);
 							break;
@@ -40,8 +48,9 @@ namespace struct_lab_student {
 		}
 
 
-		static void Main() {
-	  		Console.OutputEncoding = UTF8Encoding.UTF8;
+		static void Main()
+		{
+			Console.OutputEncoding = UTF8Encoding.UTF8;
 			List<Student> students = ReadData("../input.txt");
 			RunMenu(students);
 		}
