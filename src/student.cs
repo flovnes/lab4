@@ -19,11 +19,11 @@ namespace struct_lab_student {
 			patronymic = fields[2];
 			sex = char.Parse(fields[3]);
 			dateOfBirth = fields[4];
-            Marks = [
-                char.Parse(fields[5]),
+			Marks = [
+				char.Parse(fields[5]),
                 char.Parse(fields[6]),
                 char.Parse(fields[7])
-            ];
+			];
 			scholarship = int.Parse(fields[8]);
 		}
 	}
