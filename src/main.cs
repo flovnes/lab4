@@ -46,7 +46,7 @@ namespace struct_lab_student
 				}
 			} while (match != 0);
 		}
-    
+
 		static void Main()
 		{
 			Console.OutputEncoding = UTF8Encoding.UTF8;
