@@ -1,3 +1,4 @@
+using System.Text;
 namespace struct_lab_student
 {
 	public partial class Program
