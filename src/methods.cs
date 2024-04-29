@@ -1,68 +1,35 @@
-namespace struct_lab_student
-{
-	public partial class Program
-	{
+namespace struct_lab_student {
+	public partial class Program {
 		static void Var9(List<Student> students) { }
 
-		static void Var10(List<Student> students)
-		{
-			static double CountAverageScore(Student student)
-			{
-				char[] marks = student.Marks;
-				double sum = 0;
-				foreach (var c in marks)
-				{
-					sum += (c == '-') ? 2 : double.Parse(c.ToString());
-				}
-
-				return Math.Round(sum / 3, 1);
-			}
-
-			static IEnumerable<Student> FilterTalentedPhysicians(List<Student> students)
-			{
-				return students.Where(student => student.Marks[1] == '5');
-			}
-
-			foreach (var student in FilterTalentedPhysicians(students))
-			{
-				Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {CountAverageScore(student):0.0} {student.scholarship}");
-			}
+		static void Var10(List<Student> students) {
+            foreach (var student in Filter(students, IsTalentedPhysician))
+				Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {EvalAverage(student):0.0} {student.scholarship}");
 		}
 
-		static void Var24(List<Student> students)
-		{
-			var summer_kids = FilterSummerKids(students);
-			foreach (var (dude, avg) in summer_kids.Zip(EvalAverages(summer_kids)))
-				Console.WriteLine($"{dude.surName} {dude.firstName} {avg:0.0}");
+        static void Var24(List<Student> students) {
+			var summer_kids = Filter(students, IsSummer);
+			foreach (var dude in summer_kids)
+				Console.WriteLine($"{dude.surName} {dude.firstName} {EvalAverage(dude)}");
 		}
 
-		public static IEnumerable<Student> FilterSummerKids(List<Student> students)
-		{
-			return students.Where(student =>
-			{
-				if (DateTime.TryParseExact(student.dateOfBirth, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None,
-					out DateTime date)
-					)
-				{
-					return date.Month >= 6 && date.Month <= 8;
-				}
-				return false;
-			});
+		public static IEnumerable<Student> Filter(List<Student> students, Func<Student, bool> Condition) {
+			return students.Where(Condition);
 		}
 
-		public static List<double> EvalAverages(IEnumerable<Student>? students)
-		{
-			List<double> averages = [];
-			if (students != null)
-			{
-				foreach (var dude in students)
-				{
-					int sum = 0;
-					for (int i = 0; i < 3; i++) sum += (dude.Marks[i] == '-') ? 2 : dude.Marks[i] - '0';
-					averages.Add(sum / 3.0);
-				}
-			}
-			return averages;
+        private static bool IsSummer(Student student) {
+            int month = int.Parse(student.dateOfBirth[3..4]);
+            return month >= 6 && month <= 8;
+        }
+
+        private static bool IsTalentedPhysician(Student student) {
+            return student.Marks[1] == '5';
+        }
+
+        public static double EvalAverage(Student student) {
+            double sum = 0;
+            foreach (var c in student.Marks) sum += (c == '-') ? 2 : double.Parse(c.ToString());
+            return Math.Round(sum / 3, 1);
 		}
 	}
 }
