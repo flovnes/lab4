@@ -1,4 +1,5 @@
 ﻿using System.Text;
+
 namespace struct_lab_student {
 	public partial class Program {
 		static List<Student> ReadData(string fileName) {
