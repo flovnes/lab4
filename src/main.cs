@@ -41,7 +41,7 @@ namespace struct_lab_student
 							break;
 						default:
 							Console.WriteLine("Немає такого варіанту.");
-							break;
+				            	break;
 					}
 				}
 			} while (match != 0);
