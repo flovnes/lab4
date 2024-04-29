@@ -10,56 +10,59 @@ namespace struct_lab_student
 			{
 				char[] marks = student.Marks;
 				double sum = 0;
-				double n = marks.Length;
 				foreach (var c in marks)
 				{
-					if (c == '-')
-					{
-						sum += 2;
-					}
-					else { sum += double.Parse(c.ToString()); }
-
+					sum += (c == '-') ? 2 : double.Parse(c.ToString());
 				}
 
-				return sum / n;
+				return Math.Round(sum / 3, 1);
 			}
-			foreach (var student in students)
+
+			static IEnumerable<Student> FilterTalentedPhysicians(List<Student> students)
 			{
-				if (student.Marks[1] == '5')
-				{
-					Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {CountAverageScore(student)} {student.scholarship}");
-				}
-			};
+				return students.Where(student => student.Marks[1] == '5');
+			}
+
+			foreach (var student in FilterTalentedPhysicians(students))
+			{
+				Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {CountAverageScore(student):0.0} {student.scholarship}");
+			}
 		}
-    
-		static void Var24(List<Student> students) {
+
+		static void Var24(List<Student> students)
+		{
 			var summer_kids = FilterSummerKids(students);
 			foreach (var (dude, avg) in summer_kids.Zip(EvalAverages(summer_kids)))
 				Console.WriteLine($"{dude.surName} {dude.firstName} {avg:0.0}");
 		}
 
-		public static IEnumerable<Student> FilterSummerKids(List<Student> students) {
-			return students.Where(student => {
+		public static IEnumerable<Student> FilterSummerKids(List<Student> students)
+		{
+			return students.Where(student =>
+			{
 				if (DateTime.TryParseExact(student.dateOfBirth, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None,
 					out DateTime date)
-					){
+					)
+				{
 					return date.Month >= 6 && date.Month <= 8;
 				}
 				return false;
 			});
 		}
 
-		public static List<double> EvalAverages(IEnumerable<Student>? students) {
+		public static List<double> EvalAverages(IEnumerable<Student>? students)
+		{
 			List<double> averages = [];
-			if (students != null) {
-				foreach (var dude in students) {
+			if (students != null)
+			{
+				foreach (var dude in students)
+				{
 					int sum = 0;
 					for (int i = 0; i < 3; i++) sum += (dude.Marks[i] == '-') ? 2 : dude.Marks[i] - '0';
 					averages.Add(sum / 3.0);
-				}	
+				}
 			}
 			return averages;
 		}
 	}
 }
-
