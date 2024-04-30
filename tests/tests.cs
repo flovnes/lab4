@@ -19,7 +19,7 @@ namespace student_tests
 		public static void TestVar10()
 		{
 			List<Student> students = [];
-			students.Add(new("Андрущенко Вадим Миколайович 23.06.2004 2 1 - 1285"));
+			students.Add(new("Андрущенко Вадим Миколайович M 23.06.2004 2 1 - 1285"));
 			students.Add(new("Стакан Єгор Олександрович Ч 04.01.2006 4 5 3 4319"));
 			students.Add(new("Кірпіч Влад Шварцович Ч 12.06.1998 4 4 5 3538"));
 			students.Add(new("Муха Саня Респектович F 12.11.1999 3 5 4 3392"));
@@ -32,10 +32,11 @@ namespace student_tests
 			}
 			Assert.Equal(2, count);
 
-			double[] expectedAverages = {4.0,4.3,4.0};
+			double[] expectedAverages = { 1.7, 4.0, 4.3, 4.0 };
 			int counter = 0;
-			foreach(var student in students) {
-				Assert.Equal(Program.EvalAverage(student),expectedAverages[counter]);
+			foreach (var student in students)
+			{
+				Assert.Equal(Program.EvalAverage(student), expectedAverages[counter]);
 				counter++;
 			}
 		}
