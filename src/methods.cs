@@ -15,24 +15,29 @@ namespace struct_lab_student
 				Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {EvalAverage(student):0.0} {student.scholarship}");
 		}
 
+
 		public static void Var24(List<Student> students)
 		{
 			Console.WriteLine("\nСписок студентів, які народились влітку:");
 			var summer_kids = Filter(students, IsSummer);
 			foreach (var dude in summer_kids)
+
 				Console.WriteLine($"\r{dude.surName} {dude.firstName} {EvalAverage(dude):0.0}");
 		}
 
 		private static List<Student> ProcessData(List<Student> students)
 		{
 			List<Student> processedStudents = [];
-
+      
 			foreach (var student in students)
 			{
 				var newStudent = student;
 				processedStudents.Add(newStudent);
 				newStudent.sex = (student.sex == 'M' || student.sex == 'Ч') ? 'Ч' : (student.sex == 'F' || student.sex == 'Ж') ? 'Ж' : '?';
 			}
+			
+			return processedStudents;
+		}
 
 			return processedStudents;
 		}
@@ -49,6 +54,11 @@ namespace struct_lab_student
 									$"{student.scholarship}");
 				}
 			}
+		}
+		
+		public static IEnumerable<Student> Filter(List<Student> students, Func<Student, bool> Condition)
+		{
+			return students.Where(Condition);
 		}
 
 		public static IEnumerable<Student> Filter(List<Student> students, Func<Student, bool> Condition)

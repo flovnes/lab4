@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 namespace struct_lab_student
 {
 	public partial class Program
@@ -46,7 +46,6 @@ namespace struct_lab_student
 				}
 			} while (match != 0);
 		}
-
 
 		static void Main()
 		{
