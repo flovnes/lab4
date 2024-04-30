@@ -16,24 +16,6 @@ namespace student_tests
 		}
 
 		[Fact]
-		public static void Student_Var10_ReturnStudents()
-		{
-			List<Student> students = [];
-			students.Add(new("Андрущенко Вадим Миколайович M 23.06.2004 2 1 - 1285"));
-			students.Add(new("Стакан Єгор Олександрович Ч 04.01.2006 4 5 3 4319"));
-			students.Add(new("Кірпіч Влад Шварцович Ч 12.06.1998 4 4 5 3538"));
-			students.Add(new("Муха Саня Респектович F 12.11.1999 3 5 4 3392"));
-
-			int counter = 0;
-			foreach (Student student in students)
-			{
-				if (Program.IsTalentedPhysician(student))
-					counter++;
-			}
-			Assert.Equal(2, counter);
-		}
-
-		[Fact]
 		public static void Student_EvalAverage_ReturnDouble() 
 		{
 			int counter = 0;
@@ -50,6 +32,24 @@ namespace student_tests
 		}
 		
 		[Fact]
+		public static void Student_FilterPhysicians_ReturnStudents()
+		{
+			List<Student> students = [];
+			students.Add(new("Андрущенко Вадим Миколайович M 23.06.2004 2 1 - 1285"));
+			students.Add(new("Стакан Єгор Олександрович Ч 04.01.2006 4 5 3 4319"));
+			students.Add(new("Кірпіч Влад Шварцович Ч 12.06.1998 4 4 5 3538"));
+			students.Add(new("Муха Саня Респектович F 12.11.1999 3 5 4 3392"));
+
+			int counter = 0;
+			foreach (Student student in students)
+			{
+				if (Program.IsTalentedPhysician(student))
+					counter++;
+			}
+			Assert.Equal(2, counter);
+		}
+		
+		[Fact]
 		public static void Student_FilterSummer_ReturnStudents() 
 		{
 			List<Student> students = [];
@@ -57,13 +57,13 @@ namespace student_tests
 			students.Add(new("surname FIRST_NAME 🔥 F 02.06.3220 3 3 3 1234"));
 			students.Add(new("1 2 3 4 29.08.2002 - 5 - 6666"));
 			
-			int count = 0;
+			int counter = 0;
 			foreach (Student student in students)
 			{
 				if (Program.IsBornInSummer(student))
-					count++;
+					counter++;
 			}
-			Assert.Equal(2, count);
+			Assert.Equal(2, counter);
 		}
 	}
 }
