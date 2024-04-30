@@ -58,11 +58,6 @@ namespace struct_lab_student
 			return students.Where(Condition);
 		}
 
-		public static IEnumerable<Student> Filter(List<Student> students, Func<Student, bool> Condition)
-		{
-			return students.Where(Condition);
-		}
-
 		public static bool IsSummer(Student student)
 		{
 			int month = int.Parse(student.dateOfBirth[3..5]);
