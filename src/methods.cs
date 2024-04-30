@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 
 namespace struct_lab_student
 {
