@@ -1,9 +1,9 @@
 import random
 
-surnames = ['surname1', 'surname2', 'surname3', 'surname4']
-firstnames = ['firstname1', 'firstname2', 'firstname3', 'firstname4']
-patronymics = ['patronymic1', 'patronymic2', 'patronymic3', 'patronymic4']
-sexes = ['M', 'F']
+surnames = ['Атаманенко', 'Конопленко', 'Атамась', 'Єрмоленко']
+firstnames = ['Бодя', 'Саша', 'Софія', 'Ніка']
+patronymics = ['Сергійович', 'Романович', 'Степанович', 'Георгійович']
+sexes = ['M', 'F', 'Ж', 'Ч']
 marks = [1, 2, 3, 4, 5, '-']
 scholarships = list(range(1234, 4322))
 
@@ -22,6 +22,6 @@ for _ in range(20):
     line = f"{surname} {firstname} {patronymic} {sex} {date_of_birth} {mark1} {mark2} {mark3} {scholarship}"
     lines.append(line)
 
-with open('input.txt', 'w') as file:
+with open('input.txt', 'w', encoding='utf-8') as file:
     for line in lines:
         file.write(line + '\n')
