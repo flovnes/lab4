@@ -1,6 +1,5 @@
 using Xunit;
 using struct_lab_student;
-using System.Runtime.ConstrainedExecution;
 
 namespace student_tests
 {
@@ -20,7 +19,8 @@ namespace student_tests
 		public static void TestVar10()
 		{
 			List<Student> students = [];
-			students.Add(new("Стакан Єгор Олександрович Ч 04.01.2006 5 5 - 4319"));
+			students.Add(new("Андрущенко Вадим Миколайович 23.06.2004 2 1 - 1285"));
+			students.Add(new("Стакан Єгор Олександрович Ч 04.01.2006 4 5 3 4319"));
 			students.Add(new("Кірпіч Влад Шварцович Ч 12.06.1998 4 4 5 3538"));
 			students.Add(new("Муха Саня Респектович F 12.11.1999 3 5 4 3392"));
 
