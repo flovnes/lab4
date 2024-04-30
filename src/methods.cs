@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace struct_lab_student
 {
 	public partial class Program
@@ -11,31 +13,120 @@ namespace struct_lab_student
 		public static void Var10(List<Student> students)
 		{
 			Console.WriteLine("\nСписок студентів з відмінними оцінками з фізики:");
-			foreach (var student in Filter(students, IsTalentedPhysician))
-				Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {EvalAverage(student):0.0} {student.scholarship}");
+			foreach (var student in students.Where(IsTalentedPhysician))
+				Console.WriteLine($"{student.surName} {student.firstName} {student.patronymic} {Average(student):0.0} {student.scholarship}");
 		}
 
 
 		public static void Var24(List<Student> students)
 		{
 			Console.WriteLine("\nСписок студентів, які народились влітку:");
-			var summer_kids = Filter(students, IsBornInSummer);
-			foreach (var dude in summer_kids)
+			var summer_kids = students.Where(IsBornInSummer);
+			foreach (var student in summer_kids)
+				Console.WriteLine($"\r{student.surName} {student.firstName} {Average(student):0.0}");
+		}
+		
+		public static void Var26(List<Student> students)
+		{
+			var maleStudents = students.Where(s => IsMale(s));
+			
+			if (!maleStudents.Any())
+			{
+				Console.WriteLine("Немає студентів чоловічої статі.");
+				return;
+			}
+			
+			double maleSum = 0.0;
+			
+			foreach (var student in maleStudents)
+				maleSum += Average(student);
+		
+			double maleAverage = maleSum / maleStudents.Count();
+			
+			var result = students.Where(s => Average(s) > maleAverage && IsFemale(s));
+			
+			if (!result.Any())
+			{
+				Console.WriteLine("Немає студенток, які задовольняють умову.");
+				return;
+			}
+			
+			foreach (var student in result)
+				Console.WriteLine($"\r{student.surName} {student.firstName} {student.patronymic}");
+		}
 
-				Console.WriteLine($"\r{dude.surName} {dude.firstName} {EvalAverage(dude):0.0}");
+		public static void Var27(List<Student> students)
+		{
+			var studentsByDayAndYear = GroupStudentsByDayAndYear(students);
+			var studentsByDayOnly = GroupStudentsByDayOnly(students);
+
+			Console.WriteLine("\nСтуденти, народжені в один день та рік:");
+			foreach (var group in studentsByDayAndYear)
+			{
+				if (group.Students.Count > 1) 
+				{
+					Console.WriteLine($"Дата: {group.Date}");
+					foreach (var student in group.Students)
+					{
+						Console.WriteLine($"\t{student.surName} {student.firstName} {student.patronymic}");
+					}
+				}
+			}
+
+			Console.WriteLine("\nСтуденти, народжені в один день (різні роки):");
+			foreach (var group in studentsByDayOnly)
+			{
+				if (group.Students.Count > 1) 
+				{
+					Console.WriteLine($"Дата: {group.Day}");
+					foreach (var student in group.Students)
+					{
+						Console.WriteLine($"\t{student.surName} {student.firstName} {student.patronymic} ({student.dateOfBirth[6..]})");
+					}
+				}
+			}
+		}
+
+		private static List<(string Date, List<Student> Students)> GroupStudentsByDayAndYear(List<Student> students)
+		{
+			var groups = new List<(string Date, List<Student> Students)>();
+
+			var groupedStudents = students.GroupBy(s => s.dateOfBirth[..2] + " " + s.dateOfBirth[6..]); // Concatenate day and year
+
+			foreach (var group in groupedStudents)
+			{
+				groups.Add((group.Key, group.ToList()));
+			}
+
+			return groups;
+		}
+
+
+		private static List<(string Day, List<Student> Students)> GroupStudentsByDayOnly(List<Student> students)
+		{
+			var groups = new List<(string Day, List<Student> Students)>();
+
+			var groupedStudents = students.GroupBy(s => s.dateOfBirth[..2]); // Extract day
+
+			foreach (var group in groupedStudents)
+			{
+				groups.Add((group.Key, group.ToList()));
+			}
+
+			return groups;
 		}
 
 		private static List<Student> ProcessData(List<Student> students)
 		{
 			List<Student> processedStudents = [];
-      
+	  
 			foreach (var student in students)
 			{
 				var newStudent = student;
 				processedStudents.Add(newStudent);
-				newStudent.sex = (student.sex == 'M' || student.sex == 'Ч') ? 'Ч' : (student.sex == 'F' || student.sex == 'Ж') ? 'Ж' : '?';
+				newStudent.sex = IsMale(student) ? 'Ч' : IsFemale(student) ? 'Ж' : '?';
 			}
-			
+
 			return processedStudents;
 		}
 
@@ -52,11 +143,6 @@ namespace struct_lab_student
 				}
 			}
 		}
-		
-		public static IEnumerable<Student> Filter(List<Student> students, Func<Student, bool> Condition)
-		{
-			return students.Where(Condition);
-		}
 
 		public static bool IsBornInSummer(Student student)
 		{
@@ -69,11 +155,21 @@ namespace struct_lab_student
 			return student.Marks[1] == '5';
 		}
 
-		public static double EvalAverage(Student student)
+		public static double Average(Student student)
 		{
 			double sum = 0;
 			foreach (var c in student.Marks) sum += (c == '-') ? 2 : double.Parse(c.ToString());
 			return Math.Round(sum / 3, 1);
+		}
+
+			private static bool IsFemale(Student student)
+		{
+			return student.sex == 'F' || student.sex == 'Ж';
+		}
+
+		private static bool IsMale(Student student)
+		{
+			return student.sex == 'M' || student.sex == 'Ч';
 		}
 	}
 }

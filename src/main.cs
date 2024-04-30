@@ -22,7 +22,7 @@ namespace struct_lab_student
 			int match;
 			do
 			{
-				Console.Write("\n<- Вихід [0]\nВиконати варіант 9 студента Попов Антон [1]\nВиконати варіант 10 студента Дмитро Киба [2]\nВиконати варіант 24 студента Волощук Влад [3]\nНомер > ");
+				Console.Write("\n<- Вихід [0]\nВиконати варіант 9 студента Попов Антон [1]\nВиконати варіант 10 студента Дмитро Киба [2]\nВиконати варіант 24 студента Волощук Влад [3]\nВиконати варіант 26 [4]\nВиконати варіант 27 [5]\nНомер > ");
 				string? s = Console.ReadLine();
 				if (int.TryParse(s, out match))
 				{
@@ -36,6 +36,12 @@ namespace struct_lab_student
 							break;
 						case 3:
 							Var24(students);
+							break;
+						case 4:
+							Var26(students);
+							break;
+						case 5:
+							Var27(students);
 							break;
 						case 0:
 							break;
