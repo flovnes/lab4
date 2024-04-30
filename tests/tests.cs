@@ -26,7 +26,7 @@ namespace student_tests
 			double[] expectedAverages = [3.7, 2.3, 3.0];
 			foreach (var (student, average) in students.Zip(expectedAverages))
 			{
-				Assert.Equal(average, Program.EvalAverage(student));
+				Assert.Equal(average, Program.Average(student));
 				counter++;
 			}
 		}
