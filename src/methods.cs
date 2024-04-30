@@ -19,7 +19,7 @@ namespace struct_lab_student
 		public static void Var24(List<Student> students)
 		{
 			Console.WriteLine("\nСписок студентів, які народились влітку:");
-			var summer_kids = Filter(students, IsSummer);
+			var summer_kids = Filter(students, IsBornInSummer);
 			foreach (var dude in summer_kids)
 
 				Console.WriteLine($"\r{dude.surName} {dude.firstName} {EvalAverage(dude):0.0}");
@@ -58,7 +58,7 @@ namespace struct_lab_student
 			return students.Where(Condition);
 		}
 
-		public static bool IsSummer(Student student)
+		public static bool IsBornInSummer(Student student)
 		{
 			int month = int.Parse(student.dateOfBirth[3..5]);
 			return month >= 6 && month <= 8;
