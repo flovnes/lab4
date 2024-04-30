@@ -39,9 +39,6 @@ namespace struct_lab_student
 			return processedStudents;
 		}
 
-			return processedStudents;
-		}
-
 		private static void WriteData(List<Student> students, string filename)
 		{
 			var max_len = students.Max(s => s.surName.Length);
