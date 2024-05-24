@@ -1,6 +1,6 @@
 ## roadmap
 
-- [ ] 💚 delikat 
+- [x] 💚 delikat
 - [x] 🔥 unit tests
 - [x] 😥 вишмат
 - [x] 💐 барні
